@@ -1,0 +1,122 @@
+ <div class="container"> 		
+        <div class="row data-ng-init="loginValidation()">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <form style="font-size:90%;">
+                        	<div>
+                        		<div class="col-md-1" style="text-align:left">Bill id:{{billid}}</div>
+                        		<div style="text-align:center;font-size: 150%"><strong>Tax Invoice</strong></div>
+                        	</div>
+                        	<table class="table">
+                        		<tbody>
+                        			<tr>
+	                        			<td class="col-md-5" style="text-align:left">TIN: 27271433314V</td>
+	                        			<td class="col-md-7" style="text-align:left">Date:{{billingDate | date: 'dd/MM/yyyy'}}</td>
+	                        		</tr>                        		
+	                        		<tr>
+	                        			<td class="col-md-5" style="text-align:left" ng-show="saveandprintflag">
+								 		    <input type="text" ng-model="merchantname" id="merchantname" placeholder="Merchant Name">
+								 		</td>
+								 		<td class="col-md-5" style="text-align:left" ng-hide="saveandprintflag">
+								 		    <b>{{merchantname}}</b> 			
+								 		</td>
+								 		<td class="col-md-7" style="text-align:left">
+								 			Tirthankar Agencies, Baramati road Bhigwan. Mobile Number: 8806871008 / 8275791008
+								 		</td>
+	                        		</tr>
+                        		</tbody>
+                        	</table>                        	
+                            <table class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>                                        
+                                        <th class="col-md-3">Product Name</th>
+                                        <th class="col-md-1">MRP</th>
+                                        <th class="col-md-1">Price</th>                                       
+                                        <th class="col-md-1">quantity</th>
+                                        <th class="col-md-1">Free item</th>                   
+                                        <th class="col-md-1">Discount</th>
+                                        <th class="col-md-1">Price</th>
+                                        <th class="col-md-1">Vat</th>
+                                        <th class="col-md-1">Vat Amount</th>
+                                        <th class="col-md-1">Final Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="selectedItem in selectedItems">                                        
+                                        <td>
+                                            <input type="text" class="form-control" ng-model="selectedItem.name" readonly/></td>
+                                        <td>
+                                           <input type="text" class="form-control" ng-model="selectedItem.mrp" readonly/></td>
+                                        <td>
+                                            <input type="text" class="form-control" ng-model="selectedItem.price | number:2" readonly/></td>
+                                        <td>
+                                            <input type="text" class="form-control" ng-model="selectedItem.quantity" readonly/></td>
+                                        <td>
+                                            <input type="text" class="form-control" ng-model="selectedItem.freeItem" readonly/></td>                                                                                                                                 
+                                        <td>
+                                            <input type="text" class="form-control" ng-model="selectedItem.discountRate | number:2" readonly/></td>                                            
+                                        <td>
+                                            <input type="text" class="form-control" ng-model="selectedItem.discountAmt | number:2" readonly/></td>                                    
+                                        <td>
+                                            <input type="text" class="form-control" ng-model="selectedItem.vat | number:2" readonly/></td>
+                                        <td>
+                                            <input type="text" class="form-control" ng-model="selectedItem.vatamt | number:2" readonly/></td>
+                                        <td>
+                                            <input type="text" class="form-control" ng-model="selectedItem.pricewithvat| number:2" readonly/></td>  
+                                    </tr>
+                                    <tr ng-show="saveandprintflag">                                        
+                                        <td>
+                                            <select class="form-control" ng-model="newItem" ng-options="x.name for x in items"/></td>
+                                        <td>
+                                            <input type="text" class="form-control" ng-model="newItem.mrp | number:2" readonly/></td>
+                                        <td>
+                                            <input type="text" class="form-control" ng-model="newItem.price | number:2" readonly/></td>
+                                        <td>
+                                            <input type="text" class="form-control" ng-model="newItem.quantity" ng-init="newItem.quantity='0'" /></td>
+                                        <td>
+                                            <input type="text" class="form-control" ng-model="newItem.freeItem" ng-init="newItem.freeItem='0'"/></td>                                        
+                                        <td>
+                                            <input type="text" class="form-control" ng-model="newItem.discountRate" ng-init="newItem.discountRate='0'"/></td>
+                                        <td>
+                                            {{ (newItem.price * newItem.quantity) - ((newItem.price * newItem.quantity * newItem.discountRate) / 100) | number:2}}</td>
+                                                                                        
+                                        <td>
+                                            <input type="text" class="form-control" ng-model="newItem.vat | number:2" readonly/></td>
+                                        <td>
+                                            {{((newItem.price * newItem.quantity) - ((newItem.price * newItem.quantity * newItem.discountRate) / 100)) * (newItem.vat /100) | number:2}}</td>                                       
+                                        <td>
+                                            {{(((newItem.price * newItem.quantity) - ((newItem.price * newItem.quantity * newItem.discountRate) / 100)) * (newItem.vat/100)) + ((newItem.price * newItem.quantity) - ((newItem.price * newItem.quantity * newItem.discountRate) / 100))  | number:2}}  </td> 
+                                    </tr>
+                                    <tr>                                        
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>Total Price</td>
+                                        <td>{{pricewithoutvatanddiscount | number:2}}</td>
+                                        <td></td>
+                                        <td>{{totalvatamt | number:2}}</td>
+                                        <td>{{totalPriceWithvat | number:2}}</td>                                         
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="form-group col-md-12" ng-show="saveflag">
+                            	<div class="col-md-6">	                            	                            	
+	                            	<input type="button" class="btn btn-danger addnew" ng-click="calculateTotal()" value="Calculate Total" ng-hide="calculateTotalflag">                                
+	                                <input type="submit" class="btn btn-info addnew" ng-click="addNew()" value="Add New" ng-hide="calculateTotalflag">
+	                            </div>                          
+	                        </div>
+	                        <table ng-show="calculateTotalflag" class="table">
+	                        	<tr>
+	                        		<td class="col-md-10">I/We hereby certify that my /our registration certificate under the Maharashtra Value Added Tax Act 2002 is in force on which the sale of goods specified in this Tax invoice has been effected by me / us & it shall be accounted for in the turnover of sales while filling of return and tax, payable on sale has been or shall be paid.</td>
+	                        		<td class="col-md-2" style="text-align:center"><br/>Signature</td>
+	                        	</tr>	
+	                        </table>              				                                          
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>     	        
+    </div>

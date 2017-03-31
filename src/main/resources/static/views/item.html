@@ -1,0 +1,50 @@
+ <div class="container" ng-init="loginValidation()">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <form ng-submit="addNew()">
+                            <table class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th><input type="checkbox" ng-model="selectedAll" ng-click="checkAll()" /></th>
+                                        <th>Product Name</th>
+                                        <th>MRP</th>
+                                        <th>Product Price</th>
+                                        <th>Product VAT</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="item in items">
+                                        <td>
+                                            <input type="checkbox" ng-model="item.selected"/></td>
+                                        <td>
+                                            <input type="text" class="form-control" ng-model="item.name" required/></td>
+                                        <td>
+                                            <input type="text" class="form-control" ng-model="item.mrp" required/></td>
+                                        <td>
+                                            <input type="text" class="form-control" ng-model="item.price" required/></td>
+                                        <td>
+                                            <input type="text" class="form-control" ng-model="item.vat" required/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="form-group col-md-6 col-md-offset-4">
+                            	<input type="button" class="btn btn-primary addnew pull-middle" ng-click="save()" value="save"> &nbsp;&nbsp;
+                                <input ng-hide="!items.length" type="button" class="btn btn-danger pull-middle" ng-click="remove()" value="Remove"> &nbsp;&nbsp;
+                                <input type="submit" class="btn btn-info addnew pull-middle" value="Add New">
+                            </div>
+                            <div class="form-group col-md-6 col-md-offset-3">
+	                            <div class="alert alert-success" ng-show="successoperationFlag">
+	                            	<strong>Success!</strong>{{operationalMessage}}                            
+	                            </div>
+	                            <div class="alert alert-danger" ng-show="failureoperationFlag">
+	                            	<strong>Fail!</strong>{{operationalMessage}}                            
+	                            </div>
+	                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

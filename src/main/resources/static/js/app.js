@@ -13,6 +13,10 @@ app.config(function($routeProvider){
             templateUrl: '/views/billing.html',
             controller: 'billingController'
         })
+        .when('/rawbilling',{
+            templateUrl: '/views/rawbilling.html',
+            controller: 'rawbillingController'
+        })
         .when('/history',{
             templateUrl: '/views/history.html',
             controller: 'historyController'
@@ -20,7 +24,7 @@ app.config(function($routeProvider){
         .when('/billdetail',{
             templateUrl: '/views/billdetail.html',
             controller: 'billdetailController'
-        })
+        })        
         .otherwise(
             { redirectTo: '/login'}
         );

@@ -29,9 +29,9 @@ app.controller("rawbillingController", ['$scope','$http','$rootScope','$location
 	            $scope.selectedItems.push({ 
 	                'name': $scope.newItem.name,
 	                'mrp': $scope.newItem.mrp,
-	                'price': $scope.newItem.price,	                
+	                'newprice': $scope.newItem.newprice,	                
 	                'quantity':$scope.newItem.quantity,	        
-	                'pricewithvat': $scope.newItem.price * $scope.newItem.quantity	                
+	                'pricewithvat': $scope.newItem.newprice * $scope.newItem.quantity	                
 	            });
 	            $scope.newItem = {};
 	    };	        
@@ -40,7 +40,7 @@ app.controller("rawbillingController", ['$scope','$http','$rootScope','$location
 	    	angular.forEach($scope.selectedItems,function(value){
 	    		$scope.totalPriceWithvat = $scope.totalPriceWithvat + value.pricewithvat;
 	    	});	    	
-	    	$scope.totalPriceWithvat = $scope.totalPriceWithvat + ($scope.newItem.price * $scope.newItem.quantity);	    	
+	    	$scope.totalPriceWithvat = $scope.totalPriceWithvat + ($scope.newItem.newprice * $scope.newItem.quantity);	    	
 	    	$scope.calculateTotalflag = true;
 	    	$scope.saveandprint();
 	    }
@@ -56,7 +56,7 @@ app.controller("rawbillingController", ['$scope','$http','$rootScope','$location
 					  'totalprice':$scope.totalPriceWithvat
 					  };
 			
-	        $http.post('http://localhost:8080/api/save/rawbill--------', billingdata, config)
+	        $http.post('http://localhost:8080/api/save/rawbill', billingdata, config)
 	          .success(function (data, status, headers, config) {
 	               $scope.PostDataResponse = data;
 	               $scope.billid = data.billid;

@@ -16,7 +16,7 @@ app.config(function($routeProvider){
         .when('/rawbilling',{
             templateUrl: '/views/rawbilling.html',
             controller: 'rawbillingController'
-        })
+        })        
         .when('/history',{
             templateUrl: '/views/history.html',
             controller: 'historyController'
@@ -24,6 +24,15 @@ app.config(function($routeProvider){
         .when('/billdetail',{
             templateUrl: '/views/billdetail.html',
             controller: 'billdetailController'
+        })
+        
+        .when('/rawhistory',{
+            templateUrl: '/views/rawhistory.html',
+            controller: 'rawhistoryController'
+        })
+        .when('/rawbilldetail',{
+            templateUrl: '/views/rawbilldetail.html',
+            controller: 'rawbilldetailController'
         })
         .when('/report',{
             templateUrl: '/views/report.html',

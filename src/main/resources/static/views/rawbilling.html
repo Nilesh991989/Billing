@@ -5,19 +5,19 @@
                     <div class="panel-body">
                         <form style="font-size:90%;">
                         	<div>
-                        		<div class="col-md-3" style="text-align:left">Bill id:{{billid}}</div>
-                        		<div style="text-align:center;font-size: 150%"><strong>Tirthankar Agency</strong></div>
+                       		<div class="col-md-5" style="text-align:left">Bill id:{{billid}}</div>
+                        		<div style="font-size: 150%"><strong>Tirthankar Agency</strong></div>
                         	</div>
                         	<table class="table">
                         		<tbody>
                         			<tr>
-	                        			<td class="col-md-7" style="text-align:left" ng-show="saveandprintflag">
+	                        			<td class="col-md-10" style="text-align:left" ng-show="saveandprintflag">
 								 		    <input type="text" ng-model="merchantname" id="merchantname" placeholder="Merchant Name">
 								 		</td>
-								 		<td class="col-md-7" style="text-align:left" ng-hide="saveandprintflag">
-								 		    <b>{{merchantname}}</b> 			
+								 		<td class="col-md-10" style="text-align:left" ng-hide="saveandprintflag">
+								 		    <b>Merchant Name : {{merchantname}}</b> 			
 								 		</td>
-	                        			<td class="col-md-5" style="text-align:left">Date:{{billingDate | date: 'dd/MM/yyyy'}}</td>
+	                        			<td class="col-md-2" style="text-align:left">Date:{{billingDate | date: 'dd/MM/yyyy'}}</td>
 	                        		</tr>
                         		</tbody>
                         	</table>                        	
@@ -38,7 +38,7 @@
                                         <td>
                                            <input type="text" class="form-control" ng-model="selectedItem.mrp" readonly/></td>
                                         <td>
-                                            <input type="text" class="form-control" ng-model="selectedItem.newprice | number:2" readonly/></td>
+                                            <input type="text" class="form-control" ng-model="selectedItem.price | number:2" readonly/></td>
                                         <td>
                                             <input type="text" class="form-control" ng-model="selectedItem.quantity" readonly/></td>                                        
                                         <td>
@@ -50,7 +50,7 @@
                                         <td>
                                             <input type="text" class="form-control" ng-model="newItem.mrp | number:2" readonly/></td>
                                         <td>
-                                            <input type="text" class="form-control" ng-model="newItem.newprice | number:2"/></td>
+                                            <input type="text" class="form-control" ng-model="newItem.newprice" ng-init="newItem.newprice='0'"/></td>
                                         <td>
                                             <input type="text" class="form-control" ng-model="newItem.quantity" ng-init="newItem.quantity='0'" /></td>                                        
                                         <td>

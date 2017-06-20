@@ -24,8 +24,7 @@ app.config(function($routeProvider){
         .when('/billdetail',{
             templateUrl: '/views/billdetail.html',
             controller: 'billdetailController'
-        })
-        
+        })        
         .when('/rawhistory',{
             templateUrl: '/views/rawhistory.html',
             controller: 'rawhistoryController'

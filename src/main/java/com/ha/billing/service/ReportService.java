@@ -2,6 +2,8 @@ package com.ha.billing.service;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Path;
@@ -74,7 +76,7 @@ public class ReportService {
 			String gstreportFolder = System.getProperty("user.home") + "\\Desktop\\GST Report";
 			Path path = Paths.get(gstreportFolder);
 			if(Files.notExists(path, LinkOption.NOFOLLOW_LINKS)){
-				Files.createDirectory(path);
+				Files.createDirectory(path);  
 			}
 		}catch (IOException e) {
 			throw new RuntimeException("Error while creating folder",e);
@@ -82,13 +84,20 @@ public class ReportService {
 	}
 	
 	private String formateCurrency(String amount){
-		 return String.valueOf(Math.round(Double.valueOf(amount)));
+		return new BigDecimal(amount).setScale(2, RoundingMode.HALF_UP).toString();
+		
 	}
 	
-	public String formatDate(String date) throws ParseException{
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-mm-yyyy");
-		Date formattedDate = simpleDateFormat.parse(date);
-		SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("dd-mm-yyyy");
-		return simpleDateFormat1.format(formattedDate);		
+	public String formatDate(String date){
+		Date formattedDate;
+		try {
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-ddHH:mm:ss.s");
+			formattedDate = simpleDateFormat.parse(date);
+			SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("dd-MM-yyyy");
+			return simpleDateFormat1.format(formattedDate);
+		} catch (ParseException e) {
+			throw new RuntimeException("Error while parsing date ",e);
+		}
+		
 	}
 }

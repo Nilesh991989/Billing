@@ -48,7 +48,7 @@ app.controller("billingController", ['$scope','$http','$rootScope','$location', 
 	               $scope.billid = data.billid;
 	        })
 	        $scope.saveflag = false;
-	        window.print();
+	        
 		};
 	    
 	    $scope.addNew = function(){

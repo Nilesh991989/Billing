@@ -3,7 +3,7 @@ package com.ha.billing.model;
 public class RawSelecedItem {
 	private String name;
 	private String mrp;
-	private String newprice;
+	private String price;
 	private String quantity;		
 	private String pricewithvat;
 	
@@ -19,11 +19,11 @@ public class RawSelecedItem {
 	public void setMrp(String mrp) {
 		this.mrp = mrp;
 	}
-	public String getNewprice() {
-		return newprice;
+	public String getPrice() {
+		return price;
 	}
-	public void setNewprice(String newprice) {
-		this.newprice = newprice;
+	public void setPrice(String price) {
+		this.price = price;
 	}
 	public String getQuantity() {
 		return quantity;

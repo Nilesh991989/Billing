@@ -62,6 +62,7 @@ app.controller("rawbillingController", ['$scope','$http','$rootScope','$location
 	               $scope.PostDataResponse = data;
 	               $scope.billid = data.billid;
 	        })
-	        $scope.saveflag = false;			
+	        $scope.saveflag = false;
+	        window.print();
 		};
 	}]);

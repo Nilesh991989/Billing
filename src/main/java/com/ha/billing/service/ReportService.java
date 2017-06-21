@@ -13,63 +13,47 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Row;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ha.billing.entity.BillingItem;
 import com.ha.billing.repository.BillingRepository;
+import com.sun.xml.txw2.annotation.XmlElement;
 
 @Service
 public class ReportService {
-	private HSSFWorkbook workbook;
-	
 	@Autowired
 	BillingRepository billingRepository;
 
 	public void generateReport(String startdate, String enddate) {
 		generateFolder();
-		HSSFSheet hssfsheet  = createHssfSheet();
 		List<BillingItem> listofbillingitem =  billingRepository.findAll();
-		generateFile(hssfsheet, listofbillingitem);
-			}
+		generateFile(listofbillingitem);
+	}
 
-	private void generateFile(HSSFSheet hssfsheet, List<BillingItem> listofbillingitem) {
-		int rowcount = 0;
-		Row row = hssfsheet.createRow(rowcount);
-		row.createCell(0).setCellValue("Bill Id");
-		row.createCell(1).setCellValue("Billing Date");
-		row.createCell(2).setCellValue("Name");
-		row.createCell(3).setCellValue("Price Without Vat");
-		row.createCell(4).setCellValue("Total VAT");
-		row.createCell(5).setCellValue("Total Price");
-		rowcount++;
-		for(BillingItem billingItem : listofbillingitem){
-			Row billingitemrow = hssfsheet.createRow(rowcount);
-			billingitemrow.createCell(0).setCellValue(billingItem.getBillid());
-			billingitemrow.createCell(1).setCellValue(billingItem.getDate());
-			billingitemrow.createCell(2).setCellValue(billingItem.getName());
-			billingitemrow.createCell(3).setCellValue(formateCurrency(billingItem.getPricewithoutvat()));
-			billingitemrow.createCell(4).setCellValue(formateCurrency(billingItem.getTotalvatamt()));
-			billingitemrow.createCell(5).setCellValue(formateCurrency(billingItem.getPricewithvat()));
-			rowcount++;
-		}
-		String report = System.getProperty("user.home") + "\\Desktop\\GST Report\\ThirthankarAgencies_Report.csv";
+	private void generateFile(List<BillingItem> listofbillingitem) {		
+		String report = System.getProperty("user.home") + "\\Desktop\\GST Report\\ThirthankarAgencies_Report.xml";
 		try {
+			Path path = Files.createFile(Paths.get(report));
+			BillingItemList billingitemlist = new BillingItemList();
+			billingitemlist.setListofbillingitem(listofbillingitem);
+			
 			FileOutputStream outputStream = new FileOutputStream(report);
-			workbook.write(outputStream);
+			JAXBContext jaxbContext = JAXBContext.newInstance(BillingItemList.class);
+			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+			// output pretty printed
+			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+			jaxbMarshaller.marshal(billingitemlist, path.toFile());
 			outputStream.close();
-		} catch (IOException e) {
+		} catch (IOException | JAXBException e) {
 			throw new RuntimeException("Exception while writing report to file",e);
 		}		
-	}
-
-	private HSSFSheet createHssfSheet() {
-		workbook = new HSSFWorkbook();
-		return workbook.createSheet("Report");	
-	}
+	}	
 
 	private void generateFolder() {
 		try {
@@ -100,4 +84,17 @@ public class ReportService {
 		}
 		
 	}
+}
+
+@XmlRootElement
+class BillingItemList{
+	private List<BillingItem> listofbillingitem;
+
+	public List<BillingItem> getListofbillingitem() {
+		return listofbillingitem;
+	}
+	@XmlElement	
+	public void setListofbillingitem(List<BillingItem> listofbillingitem) {
+		this.listofbillingitem = listofbillingitem;
+	}	
 }

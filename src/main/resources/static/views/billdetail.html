@@ -3,26 +3,28 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <form style="font-size:90%;">   
-                        	<div>
-                        		<div class="col-md-1" style="text-align:left">Bill id: {{data.billid}}</div>
-                        		<div style="text-align:center;fond-size:28px"><strong>Tax Invoice</strong></div>
-                        	</div>
+                        <form style="font-size:90%;">  
+                        	
                         	<table class="table">
                         		<tbody>
                         			<tr>
-	                        			<td class="col-md-5" style="text-align:left">TIN: 27271433314V</td>
-	                        			<td class="col-md-7" style="text-align:left">Date:{{data.date | date: 'dd/MM/yyyy'}}</td>
-	                        		</tr>                        		
-	                        		<tr>	                        		
+                        				<td class="col-md-4" style="text-align:left">Bill id: {{data.billid}}</td>
+	                        			<td class="col-md-4" style="text-align:left"><strong style="font-size: 150%">Tax Invoice</strong></td>
+	                        			<td class="col-md-4" style="text-align:left">TIN: 27271433314V</td>
+                        			</tr>
+                        			<tr>
+	                        			<td class="col-md-3" style="text-align:left">Date:{{data.date | date: 'dd/MM/yyyy'}}</td>
+	                        			<td class="col-md-5" style="text-align:left" ng-show="saveandprintflag">
+								 		    <input type="text" ng-model="merchantname" id="merchantname" placeholder="Merchant Name">
+								 		</td>
 								 		<td class="col-md-5" style="text-align:left" ng-hide="saveandprintflag">
-								 		   <b> {{data.name}} </b> 			
+								 		    <b>Name : {{data.name}}</b> 			
 								 		</td>
 								 		<td class="col-md-7" style="text-align:left">
 								 			Tirthankar Agencies, Baramati road Bhigwan. Mobile Number: 8806871008 / 8275791008
 								 		</td>
 	                        		</tr>
-                        		</tbody>
+	                           </tbody>
                         	</table>                     	
                             <table class="table table-striped table-bordered">
                                 <thead>
@@ -41,26 +43,16 @@
                                 </thead>
                                 <tbody>
                                     <tr ng-repeat="selectedItem in data.selectedItems">                                        
-                                        <td>
-                                            <input type="text" class="form-control" ng-model="selectedItem.name" readonly/></td>
-                                        <td>
-                                            <input type="text" class="form-control" ng-model="selectedItem.mrp" readonly/></td>
-                                        <td>
-                                            <input type="text" class="form-control" ng-model="selectedItem.price | number:2" readonly/></td>
-                                        <td>
-                                            <input type="text" class="form-control" ng-model="selectedItem.quantity" readonly/></td>
-                                        <td>
-                                            <input type="text" class="form-control" ng-model="selectedItem.freeItem" readonly/></td>
-                                       <td>
-                                            <input type="text" class="form-control" ng-model="selectedItem.discountRate | number:2" readonly/></td>                                            
-                                        <td>
-                                            <input type="text" class="form-control" ng-model="selectedItem.discountAmt | number:2" readonly/></td>                                            
-                                        <td>
-                                            <input type="text" class="form-control" ng-model="selectedItem.vat | number:2" readonly/></td>
-                                        <td>
-                                            <input type="text" class="form-control" ng-model="selectedItem.vatamt | number:2" readonly/></td>
-                                        <td>
-                                            <input type="text" class="form-control" ng-model="selectedItem.pricewithvat| number:2" readonly/></td>  
+                                        <td>{{selectedItem.name}}</td>
+                                        <td>{{selectedItem.mrp}}</td>
+                                        <td>{{selectedItem.price | number:2}}</td>
+                                        <td>{{selectedItem.quantity}}</td>
+                                        <td>{{selectedItem.freeItem}}</td>
+                                       <td>{{selectedItem.discountRate | number:2}}</td>                                            
+                                        <td>{{selectedItem.discountAmt | number:2}}</td>                                            
+                                        <td>{{selectedItem.vat | number:2}}</td>
+                                        <td>{{selectedItem.vatamt | number:2" readonly/></td>
+                                        <td>{{selectedItem.pricewithvat| number:2}}</td>  
                                     </tr>
                                     <tr>                                        
                                         <td></td>

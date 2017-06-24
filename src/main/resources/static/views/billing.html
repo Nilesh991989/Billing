@@ -3,37 +3,35 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <form style="font-size:90%;">
-                        	<div>
-                        		<div class="col-md-1" style="text-align:left">Bill id:{{billid}}</div>
-                        		<div style="text-align:center;font-size: 150%"><strong>Tax Invoice</strong></div>
-                        	</div>
+                        <form style="font-size:90%;">                        	
                         	<table class="table">
                         		<tbody>
                         			<tr>
-	                        			<td class="col-md-5" style="text-align:left">TIN: 27271433314V</td>
-	                        			<td class="col-md-7" style="text-align:left">Date:{{billingDate | date: 'dd/MM/yyyy'}}</td>
-	                        		</tr>                        		
-	                        		<tr>
+                        				<td class="col-md-4" style="text-align:left">Bill id:{{billid}}</td>
+	                        			<td class="col-md-4" style="text-align:left"><strong style="font-size: 150%">Tax Invoice</strong></td>
+	                        			<td class="col-md-4" style="text-align:left">TIN: 27271433314V</td>
+                        			</tr>
+                        			<tr>
+	                        			<td class="col-md-3" style="text-align:left">Date:{{billingDate | date: 'dd/MM/yyyy'}}</td>
 	                        			<td class="col-md-5" style="text-align:left" ng-show="saveandprintflag">
 								 		    <input type="text" ng-model="merchantname" id="merchantname" placeholder="Merchant Name">
 								 		</td>
 								 		<td class="col-md-5" style="text-align:left" ng-hide="saveandprintflag">
-								 		    <b>{{merchantname}}</b> 			
+								 		    Name : <b>{{merchantname}}</b> 			
 								 		</td>
 								 		<td class="col-md-7" style="text-align:left">
 								 			Tirthankar Agencies, Baramati road Bhigwan. Mobile Number: 8806871008 / 8275791008
 								 		</td>
-	                        		</tr>
-                        		</tbody>
+	                        		</tr>                        		
+                       		</tbody>
                         	</table>                        	
-                            <table class="table table-striped table-bordered">
+                            <table class="table table-bordered" style="padding:0px 0px 0px 0px;">
                                 <thead>
                                     <tr>                                        
                                         <th class="col-md-3">Product Name</th>
                                         <th class="col-md-1">MRP</th>
                                         <th class="col-md-1">Price</th>                                       
-                                        <th class="col-md-1">quantity</th>
+                                        <th class="col-md-1">Quantity</th>
                                         <th class="col-md-1">Free item</th>                   
                                         <th class="col-md-1">Discount</th>
                                         <th class="col-md-1">Price</th>
@@ -45,29 +43,29 @@
                                 <tbody>
                                     <tr ng-repeat="selectedItem in selectedItems">                                        
                                         <td>
-                                            <input type="text" class="form-control" ng-model="selectedItem.name" readonly/></td>
+                                            {{selectedItem.name}}
                                         <td>
-                                           <input type="text" class="form-control" ng-model="selectedItem.mrp" readonly/></td>
+                                           {{selectedItem.mrp}}
                                         <td>
-                                            <input type="text" class="form-control" ng-model="selectedItem.price | number:2" readonly/></td>
+                                            {{selectedItem.price | number:2}}
                                         <td>
-                                            <input type="text" class="form-control" ng-model="selectedItem.quantity" readonly/></td>
+                                            {{selectedItem.quantity}}
                                         <td>
-                                            <input type="text" class="form-control" ng-model="selectedItem.freeItem" readonly/></td>                                                                                                                                 
+                                            {{selectedItem.freeItem}}                                                                                                                                 
                                         <td>
-                                            <input type="text" class="form-control" ng-model="selectedItem.discountRate | number:2" readonly/></td>                                            
+                                            {{selectedItem.discountRate | number:2}}                                            
                                         <td>
-                                            <input type="text" class="form-control" ng-model="selectedItem.discountAmt | number:2" readonly/></td>                                    
+                                            {{selectedItem.discountAmt | number:2}}                                    
                                         <td>
-                                            <input type="text" class="form-control" ng-model="selectedItem.vat | number:2" readonly/></td>
+                                            {{selectedItem.vat | number:2}}
                                         <td>
-                                            <input type="text" class="form-control" ng-model="selectedItem.vatamt | number:2" readonly/></td>
+                                            {{selectedItem.vatamt | number:2}}
                                         <td>
-                                            <input type="text" class="form-control" ng-model="selectedItem.pricewithvat| number:2" readonly/></td>  
+                                            {{selectedItem.pricewithvat| number:2}}  
                                     </tr>
                                     <tr ng-show="saveandprintflag">                                        
                                         <td>
-                                            <select class="form-control" ng-model="newItem" ng-options="x.name for x in items"/></td>
+											<select class="form-control" ng-model="newItem" ng-options="x.name for x in items"/></td>                                          
                                         <td>
                                             <input type="text" class="form-control" ng-model="newItem.mrp | number:2" readonly/></td>
                                         <td>

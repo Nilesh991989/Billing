@@ -3,19 +3,17 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-body">
+                        <h4 style="text-align:center">Tirthankar Agency</h2> 
                         <form style="font-size:90%;">
-                        	<div>                       		
+                        	<div>                       		                        	
                         	<table class="table">
-                        		<tbody>
+                        		<tbody>                        			
                         			<tr>
-                        				<td class="col-md-4" style="text-align:left">Bill id:{{billid}}</td>
-                        				<td class="col-md-4" style="text-align:left"><strong style="font-size: 150%">Tirthankar Agency</strong></td>	                        				                        			
-                        			</tr>
-                        			<tr>
-	                        			<td class="col-md-10" style="text-align:left" ng-show="saveandprintflag">
+                        				<td style="text-align:left">Bill id:{{billid}}</td>
+	                        			<td class="col-md-6" style="text-align:left" ng-show="saveandprintflag">
 								 		    <input type="text" ng-model="merchantname" id="merchantname" placeholder="Merchant Name">
 								 		</td>
-								 		<td class="col-md-10" style="text-align:left" ng-hide="saveandprintflag">
+								 		<td class="col-md-6" style="text-align:left" ng-hide="saveandprintflag">
 								 		    <b>Merchant Name : {{merchantname}}</b> 			
 								 		</td>
 	                        			<td class="col-md-2" style="text-align:left">Date:{{billingDate | date: 'dd/MM/yyyy'}}</td>

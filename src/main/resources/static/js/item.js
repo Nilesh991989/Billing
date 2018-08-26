@@ -39,7 +39,7 @@ app.controller("itemController", ['$scope','$http','$rootScope','$location', fun
 	                'name': '', 
 	                'mrp':'',
 	                'price': '',
-	                'vat': '',
+	                'cost': '',
 	            });
 	            $scope.PD = {};
 	            $scope.operationFlag = false;

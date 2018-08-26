@@ -5,6 +5,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -67,5 +68,10 @@ public class UserController {
     	userdetails.setRole("User");
     	userdetails.setActive("Y");
     	userRepository.save(userdetails);
+    }
+    
+    @RequestMapping(value = "/users", method = RequestMethod.GET)
+    public List<User> getUsers() {
+    	return userRepository.findAll(); 
     }
 }

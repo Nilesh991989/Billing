@@ -8,20 +8,19 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="item")
+@Table(name = "item")
 public class Item implements Serializable {
 	private static final long serialVersionUID = 3137840009491574176L;
-	
 	@Id
 	@Column
 	private String name;
 	@Column
 	private String price;
 	@Column
-	private String vat;
+	private String cost;
 	@Column
 	private String mrp;
-	
+
 	public String getMrp() {
 		return mrp;
 	}
@@ -30,27 +29,31 @@ public class Item implements Serializable {
 		this.mrp = mrp;
 	}
 
-	public Item(){		
+	public Item() {
 	}
-	
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public String getPrice() {
 		return price;
 	}
+
 	public void setPrice(String price) {
 		this.price = price;
 	}
-	public String getVat() {
-		return vat;
+
+	public String getCost() {
+		return cost;
 	}
-	public void setVat(String vat) {
-		this.vat = vat;
+
+	public void setCost(String cost) {
+		this.cost = cost;
 	}
-	
-	
+
 }

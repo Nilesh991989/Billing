@@ -29,8 +29,8 @@
                                    		<td> <a ng-click="showBillDetail(historyItem.billid)">{{historyItem.billid}}</a></td>
                                 		<td>{{historyItem.name}}</td>
                                 		<td>{{historyItem.date | date: 'dd/MM/yyyy'}}</td>
-                                		<td>{{historyItem.finaldiscountamt | number:2}}</td>
-                                		<td>{{historyItem.finalPrice| number:2 }}</td>
+                                		<td>{{historyItem.finaldiscountamt | number:0}}/-</td>
+                                		<td>{{historyItem.finalPrice| number:0 }}</td>
                                 	</tr>                                   
                                 </tbody>
                             </table>

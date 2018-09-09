@@ -14,29 +14,16 @@ public class BillingItem {
 	@GeneratedValue
 	private String billid;
 	@Column
-	private String date;
+	private String name;
 	@Column
-	private String name;		
+	private String date;		
 	@Column
-	private String pricewithoutvat;
+	private String selectedItems;
 	@Column
-	private String pricewithvat;
+	private String finaldiscountamt;
 	@Column
-	private String totalvatamt;	
-	@Column
-	private String selectitem;	
-	@Column
-	private String discountRate;
-	@Column
-	private String discountAmt;
+	private String finalPrice;
 	
-	
-	public String getSelectitem() {
-		return selectitem;
-	}
-	public void setSelectitem(String selectitem) {
-		this.selectitem = selectitem;
-	}
 	public String getBillid() {
 		return billid;
 	}
@@ -55,35 +42,24 @@ public class BillingItem {
 	public void setDate(String date) {
 		this.date = date;
 	}
-	public String getPricewithoutvat() {
-		return pricewithoutvat;
+	public String getSelectedItems() {
+		return selectedItems;
 	}
-	public void setPricewithoutvat(String pricewithoutvat) {
-		this.pricewithoutvat = pricewithoutvat;
+	public void setSelectedItems(String selectedItems) {
+		this.selectedItems = selectedItems;
 	}
-	public String getPricewithvat() {
-		return pricewithvat;
+	public String getFinaldiscountamt() {
+		return finaldiscountamt;
 	}
-	public void setPricewithvat(String pricewithvat) {
-		this.pricewithvat = pricewithvat;
+	public void setFinaldiscountamt(String finaldiscountamt) {
+		this.finaldiscountamt = finaldiscountamt;
+	}
+	public String getFinalPrice() {
+		return finalPrice;
+	}
+	public void setFinalPrice(String finalPrice) {
+		this.finalPrice = finalPrice;
 	}	
-	public String getDiscountRate() {
-		return discountRate;
-	}
-	public void setDiscountRate(String discountRate) {
-		this.discountRate = discountRate;
-	}
-	public String getDiscountAmt() {
-		return discountAmt;
-	}
-	public void setDiscountAmt(String discountAmt) {
-		this.discountAmt = discountAmt;
-	}
-	public String getTotalvatamt() {
-		return totalvatamt;
-	}
-	public void setTotalvatamt(String totalvatamt) {
-		this.totalvatamt = totalvatamt;
-	}
+	
 }
  

@@ -11,7 +11,7 @@
 	                        			<td class="col-md-6" ng-show="saveandprintflag">
 								 		    Merchant Name : <input type="text" ng-model="merchantname" id="merchantname" placeholder="Merchant Name                        " required>
 								 		</td>
-								 		<td class="col-md-6" ng-hide="saveandprintflag">
+								 		<td class="col-md-6" class="form-control"  ng-hide="saveandprintflag">
 								 		    Merchant Name : <b>{{merchantname}}</b> 			
 								 		</td>
 	                        			<td class="col-md-3" style="text-align:right">Date : {{billingDate | date: 'dd/MM/yyyy'}}</td>
@@ -69,8 +69,8 @@
                                         <td></td>
                                         <td>Total Price</td>
                                         <td ng-show="discountedbill"></td>
-                                        <td ng-show="discountedbill">{{finaldiscountamt| number:2}}</td>
-                                        <td>{{finalPrice | number:2}}</td>                                         
+                                        <td ng-show="discountedbill">{{finaldiscountamt| number:0}}</td>
+                                        <td>{{finalPrice | number:0}}</td>                                         
                                     </tr>
                                 </tbody>
                             </table>

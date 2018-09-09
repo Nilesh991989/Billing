@@ -35,9 +35,9 @@
                                             <input type="text" class="form-control" ng-model="selectedItem.price | number:2" readonly/></td>
                                         <td class="col-md-1">
                                             <input type="text" class="form-control" ng-model="selectedItem.quantity" readonly/></td>                                                                                                                                                        
-                                        <td ng-show="discountedbill"  class="col-md-1">
+                                        <td  class="col-md-1" ng-show="discountedbill">
                                             <input type="text" class="form-control" ng-model="selectedItem.discountRate | number:2" readonly/></td>                                            
-                                        <td ng-show="discountedbill" class="col-md-1">
+                                        <td class="col-md-1" ng-show="discountedbill">
                                             <input type="text" class="form-control" ng-model="selectedItem.discountAmt | number:2" readonly/></td>
                                         <td class="col-md-1">
                                             <input type="text" class="form-control" ng-model="selectedItem.pricewithvat| number:2" readonly/></td>  
@@ -47,18 +47,12 @@
                                         <td></td>
                                         <td></td>
                                         <td>Total Price</td>
-                                        <td> </td>
-                                        <td>{{data.finaldiscountamt| number:2}}</td>
-                                        <td>{{data.finalPrice | number:2}}</td>            
+                                        <td ng-show="discountedbill"> </td>
+                                        <td ng-show="discountedbill">{{data.finaldiscountamt | number:0}}</td>
+                                        <td>{{data.finalPrice | number:0}}</td>            
                                     </tr>
                                 </tbody>
-                            </table>
-                            <table class="table table-bordered">
-	                        	<tr>
-	                        		<td class="col-md-10">I/We hereby certify that my /our registration certificate under the Maharashtra Value Added Tax Act 2002 is in force on which the sale of goods specified in this Tax invoice has been effected by me / us & it shall be accounted for in the turnover of sales while filling of return and tax, payable on sale has been or shall be paid.</td>
-	                        		<td class="col-md-2" style="text-align:center"><br/><br/>Signature</td>
-	                        	</tr>
-	                        </table>                                                      
+                            </table>                                                                                 
                         </form>
                     </div>
                 </div>

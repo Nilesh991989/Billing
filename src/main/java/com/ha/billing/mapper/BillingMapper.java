@@ -14,12 +14,11 @@ public class BillingMapper {
 		BillingItem item = new BillingItem();
 		item.setDate(request.getDate());
 		item.setName(request.getName());
-		item.setPricewithoutvat(request.getPricewithoutvatanddiscount());
-		item.setPricewithvat(request.getPricewithvat());
-		item.setTotalvatamt(request.getTotalvatamt());
+		item.setFinaldiscountamt(request.getFinaldiscountamt());
+		item.setFinalPrice(request.getFinalPrice());
 		SelectedItems selectedItems = new SelectedItems();
 		selectedItems.setSelectedItems(request.getSelectedItems());
-		item.setSelectitem(convertObjectToString(selectedItems));		
+		item.setSelectedItems(convertObjectToString(selectedItems));		
 		return item;
 	}
 
@@ -36,11 +35,10 @@ public class BillingMapper {
 		response.setBillid(item.getBillid());
 		response.setDate(item.getDate());
 		response.setName(item.getName());
-		response.setPricewithoutvat(item.getPricewithoutvat());
-		response.setPricewithvat(item.getPricewithvat());
-		response.setTotalvatamt(item.getTotalvatamt());
+		response.setFinaldiscountamt(item.getFinaldiscountamt());
+		response.setFinalPrice(item.getFinalPrice());
 		try {
-			SelectedItems selectedItems = objMapper.readValue(item.getSelectitem(), SelectedItems.class);
+			SelectedItems selectedItems = objMapper.readValue(item.getSelectedItems(), SelectedItems.class);
 			response.setSelectedItems(selectedItems.getSelectedItems());
 		} catch (Exception e) {
 			throw new RuntimeException("Error while converting string to object",e);

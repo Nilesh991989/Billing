@@ -40,7 +40,7 @@ app.controller("billingController", ['$scope','$http','$rootScope','$location', 
 					  'name':$scope.merchantname,
 					  'date':$scope.billingDate,					  
 					  'selectedItems':$scope.selectedItems,
-					  'finaldiscountamt': $scope.finaldiscountamtfinaldiscountamt,
+					  'finaldiscountamt': $scope.finaldiscountamt,
 					  'finalPrice':$scope.finalPrice
 					  };			
 	        $http.post('http://localhost:8080/api/save/bill', billingdata, config)

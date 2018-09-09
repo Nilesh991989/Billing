@@ -8,17 +8,10 @@ public class BillingItemResponse {
 	private String billid;
 	private String name;
 	private String date;
-	private String pricewithoutvat;
-	private String pricewithvat;
-	private String totalvatamt;
 	private List<SelectedItem> selectedItems;
-		
-	public String getTotalvatamt() {
-		return totalvatamt;
-	}
-	public void setTotalvatamt(String totalvatamt) {
-		this.totalvatamt = totalvatamt;
-	}
+	private String finaldiscountamt;
+	private String finalPrice;
+	
 	public String getBillid() {
 		return billid;
 	}
@@ -37,22 +30,22 @@ public class BillingItemResponse {
 	public void setDate(String date) {
 		this.date = date;
 	}
-	public String getPricewithoutvat() {
-		return pricewithoutvat;
-	}
-	public void setPricewithoutvat(String pricewithoutvat) {
-		this.pricewithoutvat = pricewithoutvat;
-	}
-	public String getPricewithvat() {
-		return pricewithvat;
-	}
-	public void setPricewithvat(String pricewithvat) {
-		this.pricewithvat = pricewithvat;
-	}
 	public List<SelectedItem> getSelectedItems() {
 		return selectedItems;
 	}
 	public void setSelectedItems(List<SelectedItem> selectedItems) {
 		this.selectedItems = selectedItems;
+	}
+	public String getFinaldiscountamt() {
+		return finaldiscountamt;
+	}
+	public void setFinaldiscountamt(String finaldiscountamt) {
+		this.finaldiscountamt = finaldiscountamt;
+	}
+	public String getFinalPrice() {
+		return finalPrice;
+	}
+	public void setFinalPrice(String finalPrice) {
+		this.finalPrice = finalPrice;
 	}
 }

@@ -10,6 +10,8 @@ app.controller("billingController", ['$scope','$http','$rootScope','$location', 
 		$scope.totalvatamt = 0;
 		$scope.calculateTotalflag = false;
 		$scope.saveflag = true;
+		$scope.discountedbill = true;
+		
 		
 		if($rootScope.token === undefined){
 			$location.path('/login');
@@ -38,9 +40,8 @@ app.controller("billingController", ['$scope','$http','$rootScope','$location', 
 					  'name':$scope.merchantname,
 					  'date':$scope.billingDate,					  
 					  'selectedItems':$scope.selectedItems,
-					  'pricewithoutvatanddiscount':$scope.pricewithoutvatanddiscount,
-					  'totalvatamt': $scope.totalvatamt,
-					  'pricewithvat':$scope.totalPriceWithvat
+					  'finaldiscountamt': $scope.finaldiscountamtfinaldiscountamt,
+					  'finalPrice':$scope.finalPrice
 					  };			
 	        $http.post('http://localhost:8080/api/save/bill', billingdata, config)
 	          .success(function (data, status, headers, config) {
@@ -56,35 +57,28 @@ app.controller("billingController", ['$scope','$http','$rootScope','$location', 
 	                'mrp': $scope.newItem.mrp,
 	                'price': $scope.newItem.price,	                
 	                'quantity':$scope.newItem.quantity,
-	                'freeItem': $scope.newItem.freeItem,
-	                'pricewithoutvat': $scope.newItem.price * $scope.newItem.quantity,
 	                'discountRate': $scope.newItem.discountRate,
-					'discountAmt':  ($scope.newItem.price * $scope.newItem.quantity) - (($scope.newItem.price * $scope.newItem.quantity * $scope.newItem.discountRate) / 100),
-	                'vat': $scope.newItem.vat,
-	                'vatamt' : (($scope.newItem.price * $scope.newItem.quantity) - (($scope.newItem.price * $scope.newItem.quantity * $scope.newItem.discountRate) / 100)) * ($scope.newItem.vat/100),
-	                'pricewithvat': ((($scope.newItem.price * $scope.newItem.quantity) - (($scope.newItem.price * $scope.newItem.quantity * $scope.newItem.discountRate) / 100)) * ($scope.newItem.vat/100)) + (($scope.newItem.price * $scope.newItem.quantity) - (($scope.newItem.price * $scope.newItem.quantity * $scope.newItem.discountRate) / 100))	                
+					'discountAmt':  ($scope.newItem.price * $scope.newItem.quantity * $scope.newItem.discountRate) / 100,
+	                'pricewithvat': (($scope.newItem.price * $scope.newItem.quantity) - (($scope.newItem.price * $scope.newItem.quantity * $scope.newItem.discountRate) / 100))        
 	            });
 	            $scope.newItem = {'discountRate': '0'};
 	    };	        
 	    
 	    $scope.calculateTotal = function(){
+	    	$scope.finaldiscountamt = 0;
+			$scope.finalPrice = 0;		
+			$scope.finaldiscountamt = ($scope.newItem.price * $scope.newItem.quantity * $scope.newItem.discountRate) / 100;
+			$scope.finalPrice = (($scope.newItem.price * $scope.newItem.quantity) - (($scope.newItem.price * $scope.newItem.quantity * $scope.newItem.discountRate) / 100));
 	    	angular.forEach($scope.selectedItems,function(value){
-	    		$scope.pricewithoutvatanddiscount = $scope.pricewithoutvatanddiscount + value.discountAmt;
-	    	});
-	    	$scope.pricewithoutvatanddiscount = $scope.pricewithoutvatanddiscount + ($scope.newItem.price * $scope.newItem.quantity) - (($scope.newItem.price * $scope.newItem.quantity * $scope.newItem.discountRate) / 100);
-	    	
-	    	
-	    	angular.forEach($scope.selectedItems,function(value){
-	    		$scope.totalvatamt = $scope.totalvatamt + value.vatamt;
-	    	});
-	    	$scope.totalvatamt = $scope.totalvatamt + (($scope.newItem.price * $scope.newItem.quantity) - (($scope.newItem.price * $scope.newItem.quantity * $scope.newItem.discountRate) / 100)) * ($scope.newItem.vat/100);
-	    	
-	    	angular.forEach($scope.selectedItems,function(value){
-	    		$scope.totalPriceWithvat = $scope.totalPriceWithvat + (((value.price * value.quantity) - ((value.price * value.quantity * value.discountRate) / 100)) * (value.vat/100)) + ((value.price * value.quantity) - ((value.price * value.quantity * value.discountRate) / 100));
+	    		$scope.finaldiscountamt = $scope.finaldiscountamt + value.discountAmt;
+	    		$scope.finalPrice = $scope.finalPrice + value.pricewithvat;
 	    	});	    	
-	    	$scope.totalPriceWithvat = $scope.totalPriceWithvat + ((($scope.newItem.price * $scope.newItem.quantity) - (($scope.newItem.price * $scope.newItem.quantity * $scope.newItem.discountRate) / 100)) * ($scope.newItem.vat/100)) + (($scope.newItem.price * $scope.newItem.quantity) - (($scope.newItem.price * $scope.newItem.quantity * $scope.newItem.discountRate) / 100));
-	    	
 	    	$scope.calculateTotalflag = true;
+	    	if($scope.finaldiscountamt > 0){
+	    		$scope.discountedbill = true;
+	    	}else{
+	    		$scope.discountedbill = false;
+	    	}
 	    	$scope.saveandprint();
 	    }
 	}]);
